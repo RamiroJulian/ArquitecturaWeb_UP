@@ -1,0 +1,81 @@
+openapi: 3.0.1
+info:
+  title: API para reservas de espectaculos.
+  description: Esta API se encargará de registrar las reservas para los espectaculos de Cine, teatro y eventos deportivos.
+  version: 1.0.0
+servers:
+- url: https://api.reservasya/v1/reservas
+tags:
+- name: Reservas
+  description: Este endpoint maneja la información de reservas de espectaculos.
+  
+paths:
+  /:
+    post:
+      tags:
+      - Reservas
+      summary: inserta el dato de una nueva reserva a la BD.
+      parameters:
+      - $ref: '#/components/parameters/token'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/BodyReservaPost'
+        required: true
+      responses:
+          200:
+            description: (OK) La reserva se guardo correctamente.
+            content:
+              application/json:
+                schema:
+                  $ref: '#/components/schemas/ExitoReservaPost'
+          400:
+            $ref: '#/components/responses/BadRequest'
+          401:
+            $ref: '#/components/responses/Unauthorized'
+          404:
+            $ref: '#/components/responses/NotFound'
+          500:
+            $ref: '#/components/responses/ServerError'
+            
+      
+      
+components:
+  responses:
+    Unauthorized:
+      description: (Unauthorized) no hay autorización para llamar al servicio.
+    NotFound:
+      description: (NotFound) no se encontró la información.
+    BadRequest:
+      description: (BadRequest) los datos enviados son incorrectos o existen datos obligatorios no enviados.
+    ServerError:
+      description: Error en el servidor.
+  
+  parameters:
+    token:
+        name: token
+        in: header
+        schema:
+          type: string
+        description: Token de autenticación.
+        required: true
+  
+  schemas:
+    BodyReservaPost:
+      type: object
+      properties:
+        evento_a_reservar:
+          type: string
+          description: nombre del evento
+        idEvento:
+          type: string
+          description: numero de referencia del evento
+          
+    ExitoReservaPost:
+      type: object
+      properties:
+        evento:
+          type: integer
+          enum: [1]
+          description: Bandera que nos indica si el guardado fue exitoso.
