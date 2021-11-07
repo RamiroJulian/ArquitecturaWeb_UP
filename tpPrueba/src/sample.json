@@ -1,0 +1,14 @@
+[
+    {
+        "id": "1",
+        "nombre": "espectaculo1",
+        "lugar": "lugar1",
+        "hora": "13pm"
+    },
+    {
+        "id": "2",
+        "nombre": "espectaculo2",
+        "lugar": "lugar2",
+        "hora": "15pm"
+    }
+]
