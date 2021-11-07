@@ -8,4 +8,4 @@ README.md
 
 ## Descripción del negocio elegido
 
-Un sistema de venta de entradas para espectaculos varios.
+Api que deviuelve espectaculos en agenda.
