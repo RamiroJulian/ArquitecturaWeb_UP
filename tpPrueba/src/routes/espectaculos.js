@@ -28,7 +28,7 @@ router.post('/', (req, res)=> {
 
 router.put('/:id', (req, res)=>{
     const {id} = req.params; // me quedo con el id del put
-    const {nombre, lugar, hora} = req.body;
+    const {nombre, lugar, hora} = req.body; //me quedo con los valores para poder asignarlos mas adelante
 
     if (nombre && lugar && hora){
         _.each(espectaculos, (espectaculo, i)=>{ //con el método each de underscore recorro el objeto y le asigno los valores a modificar
@@ -46,10 +46,10 @@ router.put('/:id', (req, res)=>{
 });
 
 router.delete('/:id', (req, res)=>{ // recibimos el id del espectaculo y lo eliminamos
-    _.each(espectaculos, (espectaculo, i)=>{
-        const{id} = req.params;
+    _.each(espectaculos, (espectaculo, i)=>{ 
+        const{id} = req.params; // me quedo con el id del delete
         if (espectaculo.id == id){
-            espectaculos.splice(i, 1);
+            espectaculos.splice(i, 1); // una vez que encuentra la coincidencia el metodo splice lo elimina
         }
     });
     res.send(espectaculos);
